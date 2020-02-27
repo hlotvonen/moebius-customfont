@@ -1,5 +1,7 @@
 # Moebius - A Modern ANSI & ASCII Art Editor
-    
+
+*Note*: This is a fork of [Moebius](https://github.com/blocktronics/moebius/pull/109) to include custom font support and [VileR's Ultimate Oldschool PC Font Pack](https://int10h.org/blog/2016/01/the-ultimate-oldschool-pc-font-pack-v10/)
+
 **Official website:** http://www.andyh.org/moebius/
 
 - [Introduction](#introduction)
@@ -159,7 +161,7 @@ Several binaries and packages are available for download enabling you to merely 
    - Documentation
      - [tallship](https://github.com/tallship)
    - Custom Font support contributed by [Heikki Lotvonen](https://blog.glyphdrawing.club). 
-   - The Ultimate Oldschool PC Font Pack courtesy of [Viler]https://int10h.org/blog/2016/01/the-ultimate-oldschool-pc-font-pack-v10/)
+   - The Ultimate Oldschool PC Font Pack courtesy of [VileR](https://int10h.org/blog/2016/01/the-ultimate-oldschool-pc-font-pack-v10/)
 
 3. License
    - Licensed under terms of the [Apache License, version 2.0](https://github.com/blocktronics/moebius/blob/master/LICENSE.txt)

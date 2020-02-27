@@ -1,6 +1,5 @@
-
 # Moebius - A Modern ANSI & ASCII Art Editor
-
+    
 **Official website:** http://www.andyh.org/moebius/
 
 - [Introduction](#introduction)
@@ -11,11 +10,11 @@
 
 
 # Introduction:
-
+    
 **Moebius** is a new, cross-platform and fully [FOSS](https://en.wikipedia.org/wiki/Free_and_open-source_software) ANSI Editor for Linux, MacOS, and Windows. 
-
+    
 The major feature that differentiates *Moebius* from [PabloDraw](https://github.com/blocktronics/pablodraw) is the 'half-block' brush which allows editing in a style closer to Photoshop than a text editor, although you can still use the function and cursor keys to draw with, and you should find that most of the text editing features from PD are carried over to this editor.
-
+    
 The editor is still a work in progress, but anyone who wants to try using it is also encouraged to log [feature requests and bugs](https://github.com/blocktronics/moebius/issues) on the project's GitHub page.
 
 Moebius uses a modified version of Google's Material Icons. https://material.io/icons/    
@@ -115,6 +114,18 @@ $ npm start
 ```
 
 
+## Updates
+
+* In most cases, you should just be able to issue:
+
+```
+$ cd ~/projects/moebius
+$ git pull
+$ npm install
+$ npm start
+```
+
+
 # Download Packages and Executables:
 
 Several binaries and packages are available for download enabling you to merely install for your OS and run *Moebius*.
@@ -129,19 +140,9 @@ Several binaries and packages are available for download enabling you to merely 
 
 ### ToDo
 
-- [x] Table of contents with links
-- [x] Convert plain text to nice, shiney README.md markdown doc
-- [x] Introduction
-- [x] Building from source - prereqs & deps
-- [x] Building from source - cloning *Moebius* repo and building with npm
-- [x] Downloads section
-- [x] Acknowledgements
-- [ ] Create docs/ dir and separate document for building/installing dependencies, prerequisites, and Nginx proxy for *Node.js*
-- [ ] Brief Documentation in this section with links to complete docs & user manual in docs/
-- [ ] Initialize Wiki and duplicate *some* documentation there (NOTE: Wiki's aren't part of a clone or a mirror repo)
-- [ ] Specify and clarify the particular OSes and respective versioning that *Moebius* is supported under (for binary d/l's)
-- [ ] Create packages for Arch, Slackware, SuSE, and CentOS
-- [ ] Other foshizzles TBD.
+
+- [ ] Brief Documentation in this section with links to complete docs & user manual in docs/ ???
+- [ ] Initialize Wiki and duplicate *some* documentation there (NOTE: Wiki's aren't part of a clone or a mirror repo) ???
 
 
 # Acknowledgements:
@@ -150,13 +151,13 @@ Several binaries and packages are available for download enabling you to merely 
    - Copyright 2019 - [Andy Herbert](https://github.com/andyherbert)
 
 2. Contributors
-   - Moebius includes fonts from, and has a fantastic splash screen drawn by members of the following groups
-     - Blocktronics'
-       - AlphaKing
-     - Fuel's
+   - Artwork: Moebius includes fonts from, and has a fantastic splash screen drawn by members of the following groups
+     - [Blocktronics](https://github.com/blocktronics)
+       - [AlphaKing](https://github.com/christianvozar)
+     - Fuel
        - burps
    - Documentation
-     - tallship 12:2/104 & 1337:3/116 (V'Ger)
+     - [tallship](https://github.com/tallship)
    - Custom Font support contributed by [Heikki Lotvonen](https://blog.glyphdrawing.club). 
    - The Ultimate Oldschool PC Font Pack courtesy of [Viler]https://int10h.org/blog/2016/01/the-ultimate-oldschool-pc-font-pack-v10/)
 

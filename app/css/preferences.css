@@ -1,0 +1,130 @@
+body {
+    font-size: 14px;
+    color: #aaaaaa;
+    background-color: var(--dark-mid-color);
+    overflow: hidden;
+}
+
+form {
+    width: 400px;
+    margin: 0px auto;
+}
+
+form > div {
+    margin: 2px 0px;
+}
+
+form > div:first-child {
+    margin-top: 20px;
+}
+
+label {
+    display: inline-block;
+    width: 300px;
+    text-align: right;
+    height: 32px;
+    line-height: 32px;
+}
+
+label.text_box {
+    width: 150px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+label.number_box {
+    width: 300px;
+}
+
+input {
+    vertical-align: top;
+    padding: none;
+    margin: 4px;
+    height: 16px;
+    color: white;
+    display: inline-block;
+    border: 1px solid #aaaaaa;
+    background: none;
+    font-family: var(--system-font);
+    font-size: 14px;
+    outline: none;
+    padding: 3px 6px;
+}
+
+input[type="text"] {
+    width: 190px;
+}
+
+input[type="number"] {
+    text-align: center;
+    width: 25px;
+    font-size: 12px;
+}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    border-color: white;
+}
+
+input[type="checkbox"] {
+    position: relative;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+}
+
+select {
+    line-height: 24px;
+    width: 90px;
+    height: 24px;
+    outline: none;
+}
+
+#timestamp_box {
+    margin-top: 8px;
+}
+
+#backup_folder {
+    height: 24px;
+    line-height: 24px;
+    float: left;
+    display: block;
+    width: calc(100% - 84px);
+    text-align: right;
+}
+
+button {
+    float: right;
+    color: #aaaaaa;
+    border-radius: 4px;
+    margin-left: 8px;
+    width: 70px;
+    height: 24px;
+    background: none;
+    border: 1px solid #aaaaaa;
+    outline: none;
+}
+
+button:active {
+    color: white;
+    border-color: white;
+}
+
+#reset_fkeys_container {
+    position: absolute;
+    bottom: 8px;
+    left: calc((100% - 250px) / 2);
+}
+
+#reset_fkeys {
+    position: relative;
+    display: block;
+    float: none;
+    margin: 0px auto;
+    width: 250px;
+}

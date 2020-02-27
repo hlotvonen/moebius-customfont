@@ -1,0 +1,127 @@
+body {
+    background-color: black;
+    overflow: hidden;
+}
+
+body div:first-child {
+    margin: 0px auto;
+    width: 640px;
+    height: 496px;
+    -webkit-app-region: drag;
+}
+
+button {
+    width: 100px;
+    height: 32px;
+    border-radius: 3px;
+    background: none;
+    color: white;
+    outline: none;
+    border: 1px solid #AAAAAA;
+    -webkit-app-region: none;
+}
+
+.bottom_button {
+    animation: slide 0.5s ease-out;
+}
+
+@keyframes slide {
+    0% {transform: translateY(100px);}
+    100% {transform: translateY(0px);}
+}
+
+#new_document {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+}
+
+#open {
+    position: absolute;
+    left: 132px;
+    bottom: 16px;
+}
+
+#preferences {
+    position: absolute;
+    left: 248px;
+    bottom: 16px;
+}
+
+#connect {
+    position: absolute;
+    width: 150px;
+    right: 16px;
+    bottom: 16px;
+}
+
+#new_version {
+    position: absolute;
+    width: 150px;
+    right: 16px;
+    top: -32px;
+}
+
+#connect_to_server {
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    right: 16px;
+    bottom: 49px;
+    position: fixed;
+}
+
+#connect_to_server > div {
+    width: inherit;
+    height: 32px;
+    animation: fade_in 0.5s ease-out forwards;
+}
+
+#connect_to_server > div > label {
+    font-size: 12px;
+    text-align: right;
+    width: 100px;
+    margin-right: 8px;
+    text-shadow: 0px 1px 6px black;
+}
+
+#connect_to_server > div > input {
+    color: white;
+    width: 142px;
+    height: 20px;
+    outline: none;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #AAAAAA;
+    padding: 3px;
+}
+
+label {
+    display: inline-block;
+}
+
+input {
+    display: inline-block;
+}
+
+.slide_down {
+    animation: glow 0.5s ease-in-out infinite alternate, slide_down 0.5s ease-out forwards;
+}
+
+@keyframes slide_down {
+    0% {transform: translateY(0px);}
+    100% {transform: translateY(47px);}
+}
+
+button:active {
+    border-color: white;
+}
+
+@keyframes fade_in {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes glow {
+    0% {box-shadow: 0 0 5px rgba(255, 255, 255, 0.2), inset 0 0 5px rgba(255, 255, 255, 0.1), 0 2px 0 #000;}
+    100% {box-shadow: 0 0 20px rgba(255, 255, 255, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4), 0 2px 0 #000;}
+}

@@ -88,10 +88,10 @@ function encode_as_xbin(doc) {
         }
         header = header.concat(palette_bytes);
     }
-    if (doc.font_bytes) {
+    if (doc.font.bitmask) {
         header[10] += 1 << 1;
         const font_bytes = [];
-        for (const value of doc.font_bytes) {
+        for (const value of doc.font.bitmask) {
             font_bytes.push(value);
         }
         header = header.concat(font_bytes);

@@ -555,8 +555,8 @@ function render_scroll_canvas_right(doc, render) {
     for (let y = 0; y < doc.rows; y++) render_at(render, 0, y, doc.data[y * doc.columns]);
 }
 
-function new_document({columns = 80, rows = 100, title = "", author = "", group = "", date = "", palette = ega, font_name = "IBM VGA", ice_colors = false, use_9px_font = false, comments = "", data} = {}) {
-    const doc = {columns, rows, title, author, group, date: (date != "") ? date : current_date(), palette, font_name, ice_colors, use_9px_font, comments};
+function new_document({columns = 80, rows = 100, title = "", author = "", group = "", date = "", font_bytes = "", palette = ega, font_name = "IBM VGA", ice_colors = false, use_9px_font = false, comments = "", data} = {}) {
+    const doc = {columns, rows, title, author, group, date: (date != "") ? date : current_date(), palette, font_bytes, font_name, ice_colors, use_9px_font, comments};
     if (!data || data.length != columns * rows) {
         doc.data = new Array(columns * rows);
         for (let i = 0; i < doc.data.length; i++) doc.data[i] = {fg: 7, bg: 0, code: 32};
@@ -567,7 +567,7 @@ function new_document({columns = 80, rows = 100, title = "", author = "", group 
 }
 
 function clone_document(doc) {
-    return new_document({columns: doc.columns, rows: doc.rows, title: doc.title, author: doc.author, group: doc.group, date: doc.data, palette: doc.palette, font_name: doc.font_name, ice_colors: doc.ice_colors, use_9px_font: doc.use_9px_font, comments: doc.comments, data: doc.data});
+    return new_document({columns: doc.columns, rows: doc.rows, title: doc.title, author: doc.author, group: doc.group, date: doc.data, palette: doc.palette, font_bytes: doc.font_bytes, font_name: doc.font_name, ice_colors: doc.ice_colors, use_9px_font: doc.use_9px_font, comments: doc.comments, data: doc.data});
 }
 
 function get_data_url(canvases) {
@@ -604,7 +604,7 @@ function compress(doc) {
             }
         }
     }
-    return {columns: doc.columns, rows: doc.rows, title: doc.title, author: doc.author, group: doc.group, date: doc.date, palette: doc.palette, font_name: doc.font_name, ice_colors: doc.ice_colors, use_9px_font: doc.use_9px_font, comments: doc.comments, compressed_data};
+    return {columns: doc.columns, rows: doc.rows, title: doc.title, author: doc.author, group: doc.group, date: doc.date, palette: doc.palette, font_bytes: doc.font_bytes, font_name: doc.font_name, ice_colors: doc.ice_colors, use_9px_font: doc.use_9px_font, comments: doc.comments, compressed_data};
 }
 
 function uncompress(doc) {

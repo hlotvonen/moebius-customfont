@@ -9,7 +9,6 @@ const { create_canvas } = require("./canvas");
 const { open_box } = require("../senders");
 const fs = require("fs");
 
-
 function load_custom_font() {
   const file = open_box({
     filters: [{ name: "Custom Font", extensions: ["f06", "f07", "f08", "f10", "f12", "f14", "f16", "f18", "f19", "f20", "f22", "f24", "f26", "f28", "f30", "f32"] }]
@@ -3294,18 +3293,36 @@ function lookup_url(font_name) {
 }
 
 class Font {
-  async load({ name = "IBM VGA", bytes, use_9px_font = true }) {
-    if (name === "Custom") {
-      this.name = "Custom";
-      let resp = fs.readFileSync(load_custom_font(), null)
-      bytes = resp;
-    } if (bytes) {
-      this.name = "Custom"
-    } else {
-      this.name = name;
+  async load({ name = "Default", bytes, use_9px_font = true }) {
+    if (bytes) {
+      if (name !== "Default" && name !== "Custom") {
+          this.name = name;
+          let req = new Request(lookup_url(name));
+          let resp = await fetch(req);
+          bytes = new Uint8Array(await resp.arrayBuffer());
+      } if (name === "Custom") {
+        this.name = "Custom";
+        let resp = fs.readFileSync(load_custom_font(), null)
+        bytes = resp;
+      } else {
+          this.name == "Custom"
+      }
+    } if (!bytes && name === "Default") {
+      this.name == "IBM VGA"
       let req = new Request(lookup_url(name));
       let resp = await fetch(req);
       bytes = new Uint8Array(await resp.arrayBuffer());
+    } if (!bytes) {
+      if (name === "Custom") {
+        this.name = "Custom";
+        let resp = fs.readFileSync(load_custom_font(), null)
+        bytes = resp;
+      } else {
+        this.name = name;
+        let req = new Request(lookup_url(name));
+        let resp = await fetch(req);
+        bytes = new Uint8Array(await resp.arrayBuffer());
+      }
     }
     const font_height = bytes.length / 256;
     if (font_height % 1 != 0) {

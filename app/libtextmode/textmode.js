@@ -7,7 +7,7 @@ function bytes_to_blocks({columns, rows, bytes}) {
 }
 
 class Sauce {
-    constructor({columns, rows, title = "", author = "", group = "", date, filesize = 0, ice_colors = false, use_9px_font = false, font_name = "IBM VGA", comments = ""} = {}) {
+    constructor({columns, rows, title = "", author = "", group = "", date, filesize = 0, ice_colors = false, use_9px_font = false, font_name = "Default", comments = ""} = {}) {
         this.columns = columns;
         this.rows = rows;
         this.title = title;
@@ -143,7 +143,7 @@ function get_sauce(bytes) {
             const ice_colors = (flags & 0x01) == 1;
             const use_9px_font = (flags >> 1 & 0x02) == 2;
             let font_name = bytes_to_utf8(sauce_bytes, 106, 22).replace(/\0/g, "");
-            if (font_name == "") font_name = "IBM VGA";
+            if (font_name == "") font_name = "Default";
             if (filesize == 0) {
                 filesize = bytes.length = 128;
                 if (number_of_comments) filesize -= number_of_comments * 64 + 5;

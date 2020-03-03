@@ -18,7 +18,7 @@ on("retention", (event, value) => retention = value);
 
 class NetworkCursor {
     draw() {
-        const {font} = render;
+        const { font } = render;
         this.ctx.globalCompositeOperation = "source-over";
         this.ctx.drawImage(render.ice_color_collection[Math.floor(this.y / render.maximum_rows)], this.x * font.width, (this.y % render.maximum_rows) * font.height, font.width, font.height, 0, 0, font.width, font.height);
         this.ctx.globalCompositeOperation = "difference";
@@ -641,8 +641,8 @@ class TextModeDoc extends events.EventEmitter {
         }
     }
 
-    async new_document({columns, rows, title, author, group, date, palette, font_name, use_9px_font, ice_colors, comments, data}) {
-        doc = libtextmode.new_document({columns, rows, title, author, group, date, palette, font_name, use_9px_font, ice_colors, comments, data});
+    async new_document({columns, rows, title, author, group, date, palette, font_bytes, font_name, use_9px_font, ice_colors, comments, data}) {
+        doc = libtextmode.new_document({columns, rows, title, author, group, date, palette, font_bytes, font_name, use_9px_font, ice_colors, comments, data});
         await this.start_rendering();
         this.emit("new_document");
         this.ready();
@@ -691,14 +691,16 @@ class TextModeDoc extends events.EventEmitter {
 
     get connection() {return connection;}
     get render() {return render;}
-    get font() {return render.font;}
+    get font() { return render.font; }
+    get font_height() {return render.font.height;}
     get columns() {return doc.columns;}
     get rows() {return doc.rows;}
     get title() {return doc.title;}
     get author() {return doc.author;}
     get group() {return doc.group;}
     get comments() {return doc.comments;}
-    get palette() {return doc.palette;}
+    get palette() { return doc.palette; }
+    get font_bytes() {return doc.font_bytes;}
     get font_name() {return doc.font_name;}
     get ice_colors() {return doc.ice_colors;}
     get use_9px_font() {return doc.use_9px_font;}

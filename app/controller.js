@@ -56,8 +56,18 @@ function save_as(destroy_when_done = false) {
     }
 }
 
+function export_font(destroy_when_done = false) {
+    const file = save_box(doc.file, `F${doc.font_height}`, {filters: [{name: "VGA font", extensions: [`F${doc.font_height}`]}]});
+    if (file) doc.export_font(file);
+}
+
 async function share_online() {
     const url = await doc.share_online();
+    if (url) electron.shell.openExternal(url);
+}
+
+async function share_online_xbin() {
+    const url = await doc.share_online_xbin();
     if (url) electron.shell.openExternal(url);
 }
 
@@ -117,8 +127,10 @@ on("save", (event, opts) => {
 });
 on("save_as", (event, opts) => save_as());
 on("share_online", (event, opts) => share_online());
+on("share_online_xbin", (event, opts) => share_online_xbin());
 on("open_file", (event, file) => doc.open(file));
 on("check_before_closing", (event) => check_before_closing());
+on("export_font", (event, opts) => export_font());
 on("export_as_utf8", (event) => export_as_utf8());
 on("export_as_png", (event) => export_as_png());
 on("export_as_apng", (event) => export_as_apng());

@@ -10,17 +10,17 @@
   "scripts": {
     "start": "electron .",
     "build-script": "browserify app/web_client/script.js -o server/script.js",
-    "build": "node_modules/.bin/electron-builder -mwl",
-    "build-mac": "node_modules/.bin/electron-builder -m",
-    "build-win": "node_modules/.bin/electron-builder -w",
-    "build-linux": "node_modules/.bin/electron-builder -l"
+    "build": "./node_modules/.bin/electron-builder build -mwl",
+    "build-mac": "./node_modules/.bin/electron-builder build -m",
+    "build-win": "./node_modules/.bin/electron-builder build -w",
+    "build-linux": "./node_modules/.bin/electron-builder build -l"
   },
   "author": "Andy Herbert <andy.herbert@gmail.com>",
   "license": "Apache-2.0",
   "devDependencies": {
     "browserify": "^16.5.0",
     "electron": "^6.0.8",
-    "electron-builder": "^21.2.0",
+    "electron-builder": "^22.9.1",
     "express": "^4.17.1"
   },
   "dependencies": {

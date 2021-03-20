@@ -1062,12 +1062,29 @@ class TextModeDoc extends events.EventEmitter {
         if (resp.results) return resp.results.gallery;
     }
 
+    async share_online_xbin() {
+        const bytes = libtextmode.encode_as_xbin(this)
+        const req = await fetch(`https://api.16colo.rs/v1/paste?key=${SIXTEEN_COLORS_API_KEY}&extension=xb&retention=${retention}`, {
+            body: `file=${Buffer.from(bytes).toString("base64")}`,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            method: "POST"
+        });
+        const resp = await req.json();
+        if (resp.results) return resp.results.gallery;
+    }
+
     async save_backup(file) {
         await libtextmode.write_file(this, file);
     }
 
     async export_as_utf8(file) {
         await libtextmode.write_file(this, file, {utf8: true});
+    }
+
+    export_font(file) {
+        libtextmode.export_font(this, render, file);
     }
 
     export_as_png(file) {

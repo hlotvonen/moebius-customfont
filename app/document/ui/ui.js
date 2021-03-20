@@ -170,6 +170,10 @@ function show_preview(visible) {
   set_var("preview-width", visible ? "300px" : "1px");
 }
 
+function show_charlist(visible) {
+  set_var("charlist-width", visible ? "256px" : "1px");
+}
+
 function use_pixel_aliasing(value) {
   set_var("scaling-type", value ? "high-quality" : "pixelated");
 }
@@ -276,6 +280,7 @@ on("overwrite_mode", (event, value) => overwrite_mode(value));
 
 on("show_statusbar", (event, visible) => show_statusbar(visible));
 on("show_preview", (event, visible) => show_preview(visible));
+on("show_charlist", (event, visible) => show_charlist(visible));
 on("use_pixel_aliasing", (event, value) => use_pixel_aliasing(value));
 on("hide_scrollbars", (event, value) => hide_scrollbars(value));
 on("zoom_in", (event) => zoom_in());
@@ -408,6 +413,53 @@ class Toolbar extends events.EventEmitter {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
+
+
+  draw_charlist() {    
+    const font = doc.font;
+    const { fg, bg } = palette;
+    const canvas = document.createElement("canvas");
+    const charlist = document.getElementById("charlist");
+    canvas.width = font.width * 16;
+    canvas.height = font.height * 16;
+    canvas.style.width = `${canvas.width * 2}px`;
+    canvas.style.height = `${canvas.height * 2}px`;
+    if (charlist.contains(charlist.getElementsByTagName('canvas')[0])) {
+      charlist.removeChild(charlist.getElementsByTagName('canvas')[0]);
+    }
+    charlist.appendChild(canvas);
+    canvas.addEventListener("mousedown", (event) => {
+      const rect = event.target.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const char_index = Math.floor(y / font.height / 2) * 16 + Math.floor(x / 8 / 2);
+      const selector = document.getElementById("charlist_selector");
+      selector.style.top = `${Math.floor(char_index / 16) * font.height * 2}px`;
+      selector.style.left = `${(char_index % 16) * 8 * 2}px`;
+      selector.style.height = `${font.height * 2}px`;
+      const fkey_index = this.fkey_index;
+
+      for (let i = 0; i < 12; i++) {
+        const num = i;
+        const code = char_index + i;
+        this.draw_fkey(`f${i + 1}`, char_index + i);
+        send("set_fkey", {num, fkey_index, code});
+      }
+    }, true);
+    const ctx = canvas.getContext("2d");
+    for (let y = 0, code = 0; y < 16; y++) {
+        for (let x = 0; x < 16; x++, code++) {
+            font.draw(ctx, { code, fg, bg }, x * 8, y * font.height);
+        }
+    }
+  }
+
+  redraw_charlist() {
+    if (!doc.render) return;
+    this.draw_charlist();
+  }
+
+
   draw_fkey(name, code) {
     const font = doc.font;
     const { fg, bg } = palette;
@@ -496,6 +548,7 @@ class Toolbar extends events.EventEmitter {
     $("colorize").classList.remove("brush_mode_selected");
     $("shading_block").classList.remove("brush_mode_selected");
     $("full_block").classList.remove("brush_mode_selected");
+    $("f1_block").classList.remove("brush_mode_selected");
     $("clear_block").classList.remove("brush_mode_selected");
     $("replace_color").classList.remove("brush_mode_selected");
     $("blink").classList.remove("brush_mode_selected");
@@ -509,6 +562,9 @@ class Toolbar extends events.EventEmitter {
         break;
       case this.modes.FULL_BLOCK:
         $("full_block").classList.add("brush_mode_selected");
+        break;
+      case this.modes.F1_BLOCK:
+        $("f1_block").classList.add("brush_mode_selected");
         break;
       case this.modes.SHADING_BLOCK:
         $("shading_block").classList.add("brush_mode_selected");
@@ -568,17 +624,26 @@ class Toolbar extends events.EventEmitter {
       CLEAR_BLOCK: 3,
       REPLACE_COLOR: 4,
       BLINK: 5,
-      COLORIZE: 6
+      COLORIZE: 6,
+      F1_BLOCK: 7,
     };
     this.colorize_fg = true;
     this.colorize_bg = false;
     on("show_toolbar", (event, visible) =>
       set_var_px("toolbar-height", visible ? 48 : 0)
     );
-    palette.on("set_fg", () => this.redraw_fkeys());
-    palette.on("set_bg", () => this.redraw_fkeys());
+    palette.on("set_fg", () => {
+      this.redraw_fkeys()
+      this.redraw_charlist()
+    });
+    palette.on("set_bg", () => {
+      this.redraw_fkeys()
+      this.redraw_charlist()
+    });
+    
     doc.on("render", () => {
       this.redraw_fkeys();
+      this.redraw_charlist();
       const font = doc.font;
       const sample_block = document.getElementById("sample_block");
       sample_block.width = font.width;
@@ -617,6 +682,9 @@ class Toolbar extends events.EventEmitter {
         );
         $("full_block").addEventListener("mousedown", (event) =>
           this.change_mode(this.modes.FULL_BLOCK)
+        );
+        $("f1_block").addEventListener("mousedown", (event) =>
+          this.change_mode(this.modes.F1_BLOCK)
         );
         $("shading_block").addEventListener("mousedown", (event) =>
           this.change_mode(this.modes.SHADING_BLOCK)

@@ -111,7 +111,7 @@ body.dark .panel > div {
     border-bottom-left-radius: 4px;
 }
 
-#full_block, #shading_block, #clear_block, #replace_color, #blink {
+#full_block, #shading_block, #clear_block, #replace_color, #blink, #f1_block {
     margin-left: 0px;
     margin-right: 0px;
     border-right: none;

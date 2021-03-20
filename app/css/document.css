@@ -3,6 +3,7 @@
     --toolbar-height: 48px;
     --statusbar-height: 22px;
     --preview-width: 300px;
+    --charlist-width: 256px;
     --chat-height: 0px;
 }
 #sidebar {
@@ -14,7 +15,7 @@
 #toolbar {
     position: relative;
     float: right;
-    width: calc(100% - var(--preview-width) - var(--sidebar-width));
+    width: calc(100% - var(--preview-width) - var(--charlist-width) - var(--sidebar-width));
     height: var(--toolbar-height);
 }
 .tool {
@@ -123,7 +124,7 @@ body.dark #current_colors > canvas {
 }
 #viewport {
     float: left;
-    width: calc(100% - var(--sidebar-width) -  var(--preview-width) - 1px);
+    width: calc(100% - var(--sidebar-width) -  var(--preview-width) - var(--charlist-width) - 1px);
     height: calc(100% - var(--toolbar-height) - var(--statusbar-height) - var(--chat-height) - 1px);
     border-top: 1px solid var(--border-color);
     border-left: 1px solid var(--border-color);
@@ -133,7 +134,7 @@ body.dark #current_colors > canvas {
     cursor: -webkit-image-set(url("../img/crosshair.png") 1x, url("../img/crosshair_2x.png") 2x) 15 15, crosshair;
 }
 #chat {
-    width: calc(100% - var(--sidebar-width) -  var(--preview-width));
+    width: calc(100% - var(--sidebar-width) -  var(--preview-width) - var(--charlist-width));
     height: var(--chat-height);
     max-height: calc(100% - var(--toolbar-height) - var(--statusbar-height));
     overflow: hidden;
@@ -238,6 +239,34 @@ body.dark #current_colors > canvas {
 body.dark #viewport {
     border-color: var(--dark-border-color);
     background-color: var(--dark-view-color);
+}
+#charlist {
+    position: relative;
+    float: right;
+    width: calc(var(--charlist-width) - 1px);
+    background-color: var(--mid-color);
+    height: calc(100% - var(--statusbar-height));
+    border-left: 1px solid var(--border-color);
+    overflow-y: auto;
+    overflow-x: hidden;
+    cursor: pointer;
+}
+#charlist_selector {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 16px;
+    box-shadow: 0 0 0 2px white;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+@keyframes whiteblink {
+    0% {border-color: white;} 50% {opacity: 0;}
+}
+body.dark #charlist {
+    background-color: var(--dark-mid-color);
+    border-color: var(--dark-border-color);
 }
 #preview {
     position: relative;

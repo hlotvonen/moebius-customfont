@@ -66,6 +66,7 @@ class XBin extends Textmode {
         if (font_flag) {
             this.font_bytes = this.bytes.subarray(i, i + 256 * this.font_height);
             i += 256 * this.font_height;
+            console.log(this.font_bytes)
         }
         if (compress_flag) {
             this.data = uncompress({columns: this.columns, rows: this.rows, bytes: this.bytes.subarray(i, i + this.filesize)});
@@ -88,10 +89,20 @@ function encode_as_xbin(doc) {
         }
         header = header.concat(palette_bytes);
     }
-    if (doc.font.bitmask) {
+    //if using custom font loaded to program
+    if (doc.font != null) {
         header[10] += 1 << 1;
         const font_bytes = [];
         for (const value of doc.font.bitmask) {
+            font_bytes.push(value);
+        }
+        header = header.concat(font_bytes);
+    }
+    //else use font from xbin file
+    else {
+        header[10] += 1 << 1;
+        const font_bytes = [];
+        for (const value of doc.font_bytes) {
             font_bytes.push(value);
         }
         header = header.concat(font_bytes);

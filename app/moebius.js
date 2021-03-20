@@ -258,7 +258,7 @@ electron.ipcMain.on("fkey_prefs", async (event, {id, num, fkey_index, current, b
     docs[id].modal.send("fkey_prefs", {num, fkey_index, current, bitmask, font_height});
 });
 
-electron.ipcMain.on("set_fkey", async (event, {id, num, fkey_index, code}) => {
+electron.ipcMain.on("set_fkey", async (event, { id, num, fkey_index, code }) => {
     const fkeys = prefs.get("fkeys");
     fkeys[fkey_index][num] = code;
     update_prefs("fkeys", fkeys);

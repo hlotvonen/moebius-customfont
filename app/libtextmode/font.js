@@ -11,7 +11,7 @@ const fs = require("fs");
 
 function load_custom_font() {
   const file = open_box({
-    filters: [{ name: "Custom Font", extensions: ["f06", "f07", "f08", "f10", "f12", "f14", "f16", "f18", "f19", "f20", "f22", "f24", "f26", "f28", "f30", "f32"] }]
+    filters: [{ name: "Custom Font", extensions: ["f06", "f07", "f08", "f09", "f10", "f11", "f12", "f13", "f14", "f15", "f16", "f17", "f18", "f19", "f20", "f21", "f22", "f23", "f24", "f25", "f26", "f27", "f28", "f29", "f30", "f31", "f32"] }]
   });
   if (file) {
     return file[0];

@@ -1,4 +1,5 @@
 const doc = require("../doc");
+const {toolbar} = require("../ui/ui");
 
 function line(x0, y0, x1, y1, skip_first = false) {
     const dx = Math.abs(x1 - x0);
@@ -33,6 +34,12 @@ function half_block_line(sx, sy, dx, dy, col, skip_first) {
 function full_block_line(sx, sy, dx, dy, col, skip_first = false) {
     const coords = line(sx, sy, dx, dy, skip_first);
     for (const coord of coords) doc.change_data(coord.x, coord.y, (col == 0) ? 32 : 219, col, 0);
+}
+
+function f1_block_line(sx, sy, dx, dy, col, skip_first = false) {
+    const coords = line(sx, sy, dx, dy, skip_first);
+    const code = toolbar.fkeys[toolbar.fkey_index][0]
+    for (const coord of coords) doc.change_data(coord.x, coord.y, (col == 0) ? 32 : code, col, 0);
 }
 
 function shading_block(x, y, fg, bg, reduce) {
@@ -91,4 +98,4 @@ function colorize_line(sx, sy, dx, dy, fg, bg, skip_first = false) {
     }
 }
 
-module.exports = {half_block_line, full_block_line, shading_block, shading_block_line, clear_block_line, replace_color_line, blink_line, colorize_line, line};
+module.exports = {half_block_line, full_block_line, f1_block_line, shading_block, shading_block_line, clear_block_line, replace_color_line, blink_line, colorize_line, line};

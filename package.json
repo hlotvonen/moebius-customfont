@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "electron-is-dev": "^1.1.0",
-    "json5": "^2.1.0",
+    "json5": "^2.2.2",
     "linkifyjs": "^2.1.8",
     "minimist": "^1.2.0",
     "upng-js": "^2.1.0",
